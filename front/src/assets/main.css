@@ -1,0 +1,25 @@
+@import './css/button.css';
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#app {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    flex-flow: column;
+    width: 100%;
+}
+
+p {
+    width: 100%;
+    text-align: left;
+    max-width: 150ch;
+}
+
+main {
+    padding: 10px;
+}
