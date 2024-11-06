@@ -10,14 +10,8 @@ import {stockRoutePrefix} from "@/stock/stock.route";
 </template>
 
 
-<style>
+<style scoped>
 main{
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
-  align-items: center;
-  h1{
-    text-align: center;
-  }
+  flex-grow: 0;
 }
 </style>
