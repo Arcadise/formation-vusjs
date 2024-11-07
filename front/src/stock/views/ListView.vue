@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import {stockRoutePrefix} from "@/stock/stock.route";
 import {useArticleStore} from "@/stock/store/articleStore";
-import {ref} from "vue";
-import type {Article} from "@/stock/interfaces/articles";
+import {onMounted, ref} from "vue";
+import type {ArticleIdType} from "@/stock/interfaces/articles";
 
 const articleStore = useArticleStore();
-const selectedArticles = ref<number[]>([])
+const selectedArticles = ref<ArticleIdType[]>([])
 
-const handleSelect = (id: Article['id']) => {
-  const articleIndex = selectedArticles.value.findIndex((selectedId: number) => id === selectedId);
+onMounted(() => {
+  articleStore.refresh()
+})
+
+const handleSelect = (id: ArticleIdType) => {
+  const articleIndex = selectedArticles.value.findIndex((selectedId: string) => id === selectedId);
   if(-1 === articleIndex){
     selectedArticles.value.push(id)
   }else{
@@ -20,6 +24,10 @@ const handleDelete = async () => {
   await articleStore.remove(selectedArticles.value)
   selectedArticles.value = []
 }
+
+const handleRefresh = async () => {
+  await articleStore.refresh()
+}
 </script>
 
 <template>
@@ -27,7 +35,7 @@ const handleDelete = async () => {
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <button title="Rafraichir">
+        <button title="Rafraichir" @click="handleRefresh">
           <FaIcon icon="fa-rotate-right" />
         </button>
         <RouterLink class="button" :to="{name : `${stockRoutePrefix}.add`}">

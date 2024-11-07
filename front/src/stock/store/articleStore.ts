@@ -1,44 +1,25 @@
 import {defineStore} from "pinia";
 import {computed, ref} from "vue";
-import type {Article, NewArticle} from "@/stock/interfaces/articles";
+import type {Article, ArticleIdType, NewArticle} from "@/stock/interfaces/articles";
+import {api} from "@/stock/article.api";
 
 export const useArticleStore = defineStore('article', () =>  {
-  const articles = ref<Article[]>(
-    [
-      {
-        id: 1,
-        name: 'Name1',
-        price: 1.25,
-        qty: 5
-      },
-      {
-        id: 2,
-        name: 'Name2',
-        price: 1.40,
-        qty: 6
-      },
-      {
-        id: 3,
-        name: 'Name3',
-        price: 1.62,
-        qty: 1
-      },
-    ]
-  )
+  const articles = ref<Article[]>([])
 
   const totalArticle = computed(() => articles.value.length)
 
-  const refresh =  () => {}
-
-  const add = async (newArticle : NewArticle) =>  {
-    articles.value.push({
-      id: Math.max(...articles.value.map(article => article.id)) + 1,
-      ...newArticle
-    })
+  const refresh =  async () => {
+    articles.value = await api.retrieveAll()
   }
 
-  const remove = async  (ids: Article['id'][]) => {
-    articles.value = articles.value.filter((article) => !ids.includes(article.id))
+  const add = async (newArticle : NewArticle) =>  {
+    await api.add(newArticle)
+    await refresh()
+  }
+
+  const remove = async  (ids: ArticleIdType[]) => {
+    await api.remove([...ids])
+    await refresh()
   }
 
   return {articles, totalArticle, refresh, add, remove}
