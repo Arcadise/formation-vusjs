@@ -1,9 +1,20 @@
 <script setup lang="ts">
 import {stockRoutePrefix} from "@/stock/stock.route";
 import {useArticleStore} from "@/stock/store/articleStore";
+import {ref} from "vue";
+import type {Article} from "@/stock/interfaces/articles";
 
 const articleStore = useArticleStore();
+const selectedArticles = ref<number[]>([])
 
+const handleSelect = (id: Article['id']) => {
+  const articleIndex = selectedArticles.value.findIndex((selectedId: number) => id === selectedId);
+  if(-1 === articleIndex){
+    selectedArticles.value.push(id)
+  }else{
+    selectedArticles.value.splice(articleIndex, 1)
+  }
+}
 </script>
 
 <template>
@@ -17,7 +28,7 @@ const articleStore = useArticleStore();
         <RouterLink class="button" :to="{name : `${stockRoutePrefix}.add`}">
           <FaIcon icon="fa-plus" />
         </RouterLink>
-        <button title="Supprimer">
+        <button title="Supprimer" v-show="selectedArticles.length">
           <FaIcon icon="fa-trash-can" />
         </button>
       </nav>
@@ -31,7 +42,7 @@ const articleStore = useArticleStore();
         </tr>
         </thead>
         <tbody>
-        <tr v-for="article in articleStore.articles" :key="article.id">
+        <tr v-for="article in articleStore.articles" :key="article.id" @click="handleSelect(article.id)" :class="{selected: selectedArticles.includes(article.id)}">
           <td>{{article.name}}</td>
           <td>{{article.price}}€</td>
           <td>{{article.qty}}</td>

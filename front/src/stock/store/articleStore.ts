@@ -28,13 +28,19 @@ export const useArticleStore = defineStore('article', () =>  {
 
   const totalArticle = computed(() => articles.value.length)
 
-  const refresh = async () => {}
+  const refresh =  () => {}
 
-  const add = (newArticle : NewArticle) =>  {
+  const add = async (newArticle : NewArticle) =>  {
     articles.value.push({
       id: Math.max(...articles.value.map(article => article.id)) + 1,
       ...newArticle
     })
+  }
+
+  const remove = async  (id: Article['id']) => {
+    articles.value.find((article:  Article) => {
+      return article.id === id
+    });
   }
 
   return {articles, totalArticle, refresh, add}
