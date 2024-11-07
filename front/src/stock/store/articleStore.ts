@@ -37,11 +37,9 @@ export const useArticleStore = defineStore('article', () =>  {
     })
   }
 
-  const remove = async  (id: Article['id']) => {
-    articles.value.find((article:  Article) => {
-      return article.id === id
-    });
+  const remove = async  (ids: Article['id'][]) => {
+    articles.value = articles.value.filter((article) => !ids.includes(article.id))
   }
 
-  return {articles, totalArticle, refresh, add}
+  return {articles, totalArticle, refresh, add, remove}
 })

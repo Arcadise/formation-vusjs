@@ -15,6 +15,11 @@ const handleSelect = (id: Article['id']) => {
     selectedArticles.value.splice(articleIndex, 1)
   }
 }
+
+const handleDelete = async () => {
+  await articleStore.remove(selectedArticles.value)
+  selectedArticles.value = []
+}
 </script>
 
 <template>
@@ -28,7 +33,7 @@ const handleSelect = (id: Article['id']) => {
         <RouterLink class="button" :to="{name : `${stockRoutePrefix}.add`}">
           <FaIcon icon="fa-plus" />
         </RouterLink>
-        <button title="Supprimer" v-show="selectedArticles.length">
+        <button title="Supprimer" v-show="selectedArticles.length" @click="handleDelete">
           <FaIcon icon="fa-trash-can" />
         </button>
       </nav>
