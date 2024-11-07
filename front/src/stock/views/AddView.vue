@@ -19,7 +19,7 @@
       </label>
       <div class="error"></div>
       <button type="submit" class="primary">
-        <FontAwesomeIcon icon="fa-plus" />
+        <FaIcon icon="fa-plus" />
         <span>Ajouter un article</span>
       </button>
     </form>
@@ -28,7 +28,6 @@
 
 <script setup lang="ts">
 
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 </script>
 
 <style scoped>

@@ -5,13 +5,12 @@ import {
   faPlus,
   faTrashCan,
   faChevronRight,
-  faCircleNotch
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 export const fontawesome: Plugin = (app) => {
-  library.add(faRotateRight, faPlus, faTrashCan, faChevronRight, faCircleNotch)
-  app.component('FontAwesomeIcon', FontAwesomeIcon)
+  library.add(faRotateRight, faPlus, faTrashCan, faChevronRight)
+  app.component('FaIcon', FontAwesomeIcon)
 }

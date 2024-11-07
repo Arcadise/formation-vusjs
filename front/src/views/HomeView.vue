@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {stockRoutePrefix} from "@/stock/stock.route";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 </script>
 
 <template>
@@ -8,7 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
     <h1>Gérer efficacement votre stock</h1>
     <RouterLink :to="{ name: `${stockRoutePrefix}.list`}" class="button primary">
       <span>Voir le stock</span>
-      <FontAwesomeIcon icon="fa-chevron-right" />
+      <FaIcon icon="fa-chevron-right" />
     </RouterLink>
   </main>
 </template>
