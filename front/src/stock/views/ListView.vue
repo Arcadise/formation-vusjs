@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import {stockRoutePrefix} from "@/stock/stock.route";
+import {useArticleStore} from "@/stock/store/articleStore";
+
+const articleStore = useArticleStore();
+
+</script>
+
 <template>
   <main>
     <h1>Liste des articles</h1>
@@ -23,20 +31,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>Nom 1</td>
-          <td>1.24€</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>Nom 2</td>
-          <td>1.24€</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>Lorem ipsum dolor.</td>
-          <td>2.65€</td>
-          <td>15</td>
+        <tr v-for="article in articleStore.articles" :key="article.id">
+          <td>{{article.name}}</td>
+          <td>{{article.price}}€</td>
+          <td>{{article.qty}}</td>
         </tr>
         </tbody>
       </table>
@@ -44,9 +42,6 @@
   </main>
 </template>
 
-<script setup lang="ts">
-import {stockRoutePrefix} from "@/stock/stock.route";
-</script>
 
 <style scoped>
 nav {
