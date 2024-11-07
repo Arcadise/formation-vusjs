@@ -3,9 +3,15 @@
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <button>Rafraichir</button>
-        <RouterLink class="button" :to="{name : `${stockRoutePrefix}.add`}">Ajouter</RouterLink>
-        <button>Supprimer</button>
+        <button title="Rafraichir">
+          <FontAwesomeIcon icon="fa-rotate-right" />
+        </button>
+        <RouterLink class="button" :to="{name : `${stockRoutePrefix}.add`}">
+          <FontAwesomeIcon icon="fa-plus" />
+        </RouterLink>
+        <button title="Supprimer">
+          <FontAwesomeIcon icon="fa-trash-can" />
+        </button>
       </nav>
       <div class="error"></div>
       <table>
@@ -40,6 +46,7 @@
 
 <script setup lang="ts">
 import {stockRoutePrefix} from "@/stock/stock.route";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 </script>
 
 <style scoped>

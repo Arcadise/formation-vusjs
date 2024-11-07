@@ -1,22 +1,27 @@
-button, .button {
+.button,
+button {
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-content: center;
-    padding: 0.5rem 1rem;
-    border: 0.1rem solid #eeeeee;
-    font-size: 1rem;
-    text-decoration: none;
-    color: inherit;
-    background: #eeeeee;
+    gap: 0.5rem;
+
+    background: #eee;
+    border: 0.1rem solid #eee;
     border-radius: 0.3rem;
-    cursor: pointer;
+    padding: 0.5rem 1rem;
+
+    font-size: 1rem;
+    text-decoration: inherit;
+    color: inherit;
 
     &:disabled {
-        color: #aaaaaa;
         cursor: not-allowed;
+        color: #aaa;
     }
 
     &:not(:disabled) {
+        cursor: pointer;
+
         &:hover {
             background: #ddd;
             border-color: #ddd;
@@ -28,8 +33,8 @@ button, .button {
         }
 
         &.primary {
-            background: #333;
             color: #eee;
+            background: #333;
             border-color: #333;
 
             &:hover {

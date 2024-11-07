@@ -18,13 +18,17 @@
         <span class="error"></span>
       </label>
       <div class="error"></div>
-      <button type="submit" class="primary">Ajouter un article</button>
+      <button type="submit" class="primary">
+        <FontAwesomeIcon icon="fa-plus" />
+        <span>Ajouter un article</span>
+      </button>
     </form>
   </main>
 </template>
 
 <script setup lang="ts">
 
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 </script>
 
 <style scoped>
