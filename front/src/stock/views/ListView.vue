@@ -3,6 +3,8 @@ import {stockRoutePrefix} from "@/stock/stock.route";
 import {useArticleStore} from "@/stock/store/articleStore";
 import {onMounted, ref} from "vue";
 import type {ArticleIdType} from "@/stock/interfaces/articles";
+import AsyncBtn from "@/widgets/AsyncBtn.vue";
+import ArticleCells from "@/stock/components/ArticleCells.vue";
 
 const articleStore = useArticleStore();
 const selectedArticles = ref<ArticleIdType[]>([])
@@ -35,15 +37,11 @@ const handleRefresh = async () => {
     <h1>Liste des articles</h1>
     <div class="content">
       <nav>
-        <button title="Rafraichir" @click="handleRefresh">
-          <FaIcon icon="fa-rotate-right" />
-        </button>
+        <AsyncBtn icon="fa-rotate-right" :action="handleRefresh" title="Rafraichir"/>
         <RouterLink class="button" :to="{name : `${stockRoutePrefix}.add`}">
           <FaIcon icon="fa-plus" />
         </RouterLink>
-        <button title="Supprimer" v-show="selectedArticles.length" @click="handleDelete">
-          <FaIcon icon="fa-trash-can" />
-        </button>
+        <AsyncBtn icon="fa-trash-can" :action="handleDelete" v-show="selectedArticles.length" title="Supprimer"/>
       </nav>
       <div class="error"></div>
       <table>
@@ -55,10 +53,8 @@ const handleRefresh = async () => {
         </tr>
         </thead>
         <tbody>
-        <tr v-for="article in articleStore.articles" :key="article.id" @click="handleSelect(article.id)" :class="{selected: selectedArticles.includes(article.id)}">
-          <td>{{article.name}}</td>
-          <td>{{article.price}}€</td>
-          <td>{{article.qty}}</td>
+        <tr v-for="(article, index) in articleStore.articles" :key="article.id" @click="handleSelect(article.id)" :class="{selected: selectedArticles.includes(article.id)}">
+          <ArticleCells v-model="articleStore.articles[index]"/>
         </tr>
         </tbody>
       </table>
